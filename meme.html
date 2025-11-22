@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>🎭 ГЕНЕРАТОР МЕМОВ С УНИЖЕНИЯМИ 🎭</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(45deg, #ff0000, #8B0000, #000000);
+            font-family: Arial, sans-serif; color: white; padding: 20px;
+            text-align: center;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { 
+            padding: 20px; background: rgba(0,0,0,0.8); 
+            border-radius: 15px; border: 4px solid yellow; margin-bottom: 20px;
+        }
+        h1 { 
+            font-size: 2.5em; text-shadow: 4px 4px 0 #ff0000; color: #ffff00; 
+            margin-bottom: 10px;
+        }
+        .back-btn {
+            background: linear-gradient(45deg, #ff0000, #8B0000); color: white;
+            border: none; padding: 12px 25px; font-size: 1.2em; font-weight: bold;
+            cursor: pointer; border-radius: 8px; margin: 10px;
+        }
+        .nav-buttons {
+            margin: 20px 0;
+        }
+        .nav-btn {
+            background: linear-gradient(45deg, #ffff00, #ff9900); color: black;
+            border: none; padding: 12px 20px; font-size: 1.1em; font-weight: bold;
+            cursor: pointer; border-radius: 8px; margin: 5px;
+        }
+        .meme-creator {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+            margin: 30px 0;
+        }
+        .controls-panel {
+            background: rgba(0,0,0,0.7); padding: 20px; border-radius: 15px;
+            border: 3px solid red;
+        }
+        .meme-preview {
+            background: rgba(0,0,0,0.7); padding: 20px; border-radius: 15px;
+            border: 3px solid yellow; display: flex; align-items: center;
+            justify-content: center; min-height: 400px;
+        }
+        .meme-canvas {
+            max-width: 100%; max-height: 350px; border: 3px solid white;
+            border-radius: 10px; background: white;
+        }
+        .control-group {
+            margin: 15px 0; text-align: left;
+        }
+        label { display: block; margin-bottom: 5px; color: yellow; }
+        select, input, textarea {
+            width: 100%; padding: 10px; border-radius: 8px; border: 2px solid #ff0000;
+            background: #333; color: white; font-size: 1em;
+        }
+        textarea { height: 80px; resize: vertical; }
+        .template-options {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+            margin: 10px 0;
+        }
+        .template-btn {
+            background: #444; color: white; border: 2px solid #666;
+            padding: 10px; border-radius: 8px; cursor: pointer;
+            transition: all 0.3s;
+        }
+        .template-btn:hover {
+            background: #666; border-color: yellow;
+        }
+        .template-btn.active {
+            background: #ff0000; border-color: yellow; color: yellow;
+        }
+        .action-buttons {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+            margin: 20px 0;
+        }
+        .action-btn {
+            background: linear-gradient(45deg, #ff0000, #8B0000); color: white;
+            border: none; padding: 15px; font-size: 1.1em; font-weight: bold;
+            cursor: pointer; border-radius: 8px; transition: all 0.3s;
+        }
+        .action-btn:hover {
+            transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,0,0,0.4);
+        }
+        .memes-gallery {
+            margin: 40px 0;
+        }
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px; margin: 20px 0;
+        }
+        .gallery-item {
+            background: rgba(255,255,255,0.1); padding: 10px; border-radius: 10px;
+            border: 2px solid #ff4444; cursor: pointer; transition: all 0.3s;
+        }
+        .gallery-item:hover {
+            transform: scale(1.05); border-color: yellow;
+        }
+        .gallery-item img {
+            width: 100%; height: 150px; object-fit: cover; border-radius: 8px;
+        }
+        .marquee {
+            background: #ff0000; padding: 10px; border-radius: 8px;
+            margin: 15px 0; border: 2px solid yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎭 ГЕНЕРАТОР МЕМОВ С УНИЖЕНИЯМИ 🎭</h1>
+            <div class="nav-buttons">
+                <button class="back-btn" onclick="goToMain()">🔙 НА ГЛАВНУЮ</button>
+                <button class="nav-btn" onclick="goToGame()">🎮 В ИГРУ</button>
+            </div>
+        </div>
+
+        <div class="marquee">
+            <marquee behavior="scroll" direction="left">
+                🎨 СОЗДАВАЙ МЕМЫ ПРО СЫНА ШЛЮХИ! ДЕЛИСЬ С ДРУЗЬЯМИ! УНИЖАЙ В СТИЛЕ! 🎨
+            </marquee>
+        </div>
+
+        <div class="meme-creator">
+            <div class="controls-panel">
+                <h2 style="color: yellow; margin-bottom: 20px;">⚙️ НАСТРОЙКИ МЕМА</h2>
+                
+                <div class="control-group">
+                    <label>📷 ШАБЛОН МЕМА:</label>
+                    <div class="template-options">
+                        <button class="template-btn active" onclick="selectTemplate('son')">СЫН ШЛЮХИ</button>
+                        <button class="template-btn" onclick="selectTemplate('mother')">ТАНЯ ШЛЮХА</button>
+                        <button class="template-btn" onclick="selectTemplate('brother')">НИКИТА ДЕБИЛ</button>
+                        <button class="template-btn" onclick="selectTemplate('father')">САША АЛКОНАВТ</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>📝 ТЕКСТ СВЕРХУ:</label>
+                    <textarea id="topText" placeholder="Введите текст для верха мема...">СМОТРИТЕ КАКОЙ СЫН ШЛЮХИ!</textarea>
+                </div>
+
+                <div class="control-group">
+                    <label>📝 ТЕКСТ СНИЗУ:</label>
+                    <textarea id="bottomText" placeholder="Введите текст для низа мема...">ТАНЯ ШЛЮХА ТАКЖЕ СТЫДИТСЯ!</textarea>
+                </div>
+
+                <div class="control-group">
+                    <label>🎨 ЦВЕТ ТЕКСТА:</label>
+                    <select id="textColor">
+                        <option value="white">Белый</option>
+                        <option value="yellow">Желтый</option>
+                        <option value="red">Красный</option>
+                        <option value="black">Черный</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>🔤 РАЗМЕР ТЕКСТА:</label>
+                    <select id="textSize">
+                        <option value="24">Маленький</option>
+                        <option value="32" selected>Средний</option>
+                        <option value="48">Большой</option>
+                        <option value="64">Огромный</option>
+                    </select>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="generateMeme()">🎨 СОЗДАТЬ МЕМ</button>
+                    <button class="action-btn" onclick="downloadMeme()">💾 СКАЧАТЬ МЕМ</button>
+                    <button class="action-btn" onclick="shareMeme()">📤 ПОДЕЛИТЬСЯ</button>
+                    <button class="action-btn" onclick="randomMeme()">🎲 СЛУЧАЙНЫЙ МЕМ</button>
+                </div>
+            </div>
+
+            <div class="meme-preview">
+                <canvas id="memeCanvas" width="500" height="400" class="meme-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="memes-gallery">
+            <h2 style="color: yellow; margin-bottom: 20px;">📚 ГАЛЕРЕЯ ГОТОВЫХ МЕМОВ</h2>
+            <div class="gallery-grid" id="memesGallery">
+                <!-- Готовые мемы будут добавляться сюда -->
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 15px; background: rgba(255,0,0,0.3); border-radius: 10px;">
+            <h3 style="color: yellow;">💡 ИДЕИ ДЛЯ МЕМОВ:</h3>
+            <p>"СЫН ШЛЮХИ КОГДА ВИДИТ ЗЕРКАЛО"</p>
+            <p>"ТАНЯ ШЛЮХА: МАТЬ ГОДА"</p>
+            <p>"НИКИТА ДЕБИЛ РЕШАЕТ ЗАДАЧУ 2+2"</p>
+            <p>"САША АЛКОНАВТ И ЕГО ЛЮБИМАЯ БУТЫЛКА"</p>
+        </div>
+    </div>
+
+    <script>
+        let currentTemplate = 'son';
+        const canvas = document.getElementById('memeCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Изображения для шаблонов
+        const templateImages = {
+            son: 'photo2.jpg',
+            mother: 'photo1.jpg', 
+            brother: 'photo3.jpg',
+            father: 'photo4.jpg'
+        };
+
+        // Готовые тексты для мемов
+        const memeTexts = [
+            { top: "СЫН ШЛЮХИ КОГДА", bottom: "ВИДИТ СЕБЯ В ЗЕРКАЛЕ" },
+            { top: "ТАНЯ ШЛЮХА", bottom: "МАТЬ-ГЕРОИНЯ РАЙОНА" },
+            { top: "НИКИТА ДЕБИЛ", bottom: "РЕШАЕТ СЛОЖНУЮ ЗАДАЧУ 2+2" },
+            { top: "САША АЛКОНАВТ", bottom: "И ЕГО ЛЮБИМАЯ БУТЫЛКА" },
+            { top: "ЭТОТ ТИП", bottom: "СЫН ШЛЮХИ ТАНИ" },
+            { top: "ГЕНЫ ШЛЮХИ", bottom: "ПРОЯВЛЯЮТСЯ" },
+            { top: "ЦИРК УРОДОВ", bottom: "В ПОЛНОМ СОСТАВЕ" },
+            { top: "ДНО ОБЩЕСТВА", bottom: "ДОСТИГНУТО" }
+        ];
+
+        function goToMain() {
+            window.location.href = 'index.html';
+        }
+
+        function goToGame() {
+            window.location.href = 'game.html';
+        }
+
+        function selectTemplate(template) {
+            currentTemplate = template;
+            
+            // Обновляем активную кнопку
+            document.querySelectorAll('.template-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            generateMeme();
+        }
+
+        function generateMeme() {
+            const topText = document.getElementById('topText').value;
+            const bottomText = document.getElementById('bottomText').value;
+            const textColor = document.getElementById('textColor').value;
+            const textSize = parseInt(document.getElementById('textSize').value);
+            
+            const img = new Image();
+            img.onload = function() {
+                // Очищаем canvas
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Рисуем изображение
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                
+                // Настройки текста
+                ctx.fillStyle = textColor;
+                ctx.strokeStyle = 'black';
+                ctx.lineWidth = 3;
+                ctx.textAlign = 'center';
+                ctx.font = `bold ${textSize}px Arial`;
+                
+                // Текст сверху
+                ctx.strokeText(topText, canvas.width / 2, 50);
+                ctx.fillText(topText, canvas.width / 2, 50);
+                
+                // Текст снизу
+                ctx.strokeText(bottomText, canvas.width / 2, canvas.height - 20);
+                ctx.fillText(bottomText, canvas.width / 2, canvas.height - 20);
+                
+                // Добавляем в галерею
+                addToGallery();
+            };
+            
+            img.src = templateImages[currentTemplate];
+            img.onerror = function() {
+                // Если фото не загрузилось, используем заглушку
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'white';
+                ctx.font = 'bold 24px Arial';
+                ctx.fillText('ФОТО СЫНА ШЛЮХИ', canvas.width / 2, canvas.height / 2);
+                ctx.fillText(topText, canvas.width / 2, 50);
+                ctx.fillText(bottomText, canvas.width / 2, canvas.height - 20);
+            };
+        }
+
+        function addToGallery() {
+            const gallery = document.getElementById('memesGallery');
+            const dataURL = canvas.toDataURL('image/png');
+            
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.innerHTML = `
+                <img src="${dataURL}" alt="Сгенерированный мем">
+                <div style="margin-top: 8px; font-size: 0.9em;">${document.getElementById('topText').value}</div>
+            `;
+            
+            galleryItem.onclick = function() {
+                // При клике на мем в галерее - загружаем его в редактор
+                const img = new Image();
+                img.onload = function() {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                };
+                img.src = dataURL;
+            };
+            
+            // Добавляем только если еще нет слишком много
+            if (gallery.children.length < 12) {
+                gallery.appendChild(galleryItem);
+            }
+        }
+
+        function downloadMeme() {
+            const link = document.createElement('a');
+            link.download = `meme-syn-shlyuhi-${Date.now()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            speakText("Мем скачан! Делись с друзьями и унижай этого уёбка!");
+        }
+
+        function shareMeme() {
+            if (navigator.share) {
+                canvas.toBlob(function(blob) {
+                    const file = new File([blob], "meme-syn-shlyuhi.png", { type: "image/png" });
+                    navigator.share({
+                        files: [file],
+                        title: 'Посмотри какой сын шлюхи!',
+                        text: 'Я создал мем про сына шлюхи! Посмотри!'
+                    });
+                });
+            } else {
+                speakText("Поделиться можно только на телефоне! А так качай мем и кидай в чаты!");
+            }
+        }
+
+        function randomMeme() {
+            const randomText = memeTexts[Math.floor(Math.random() * memeTexts.length)];
+            document.getElementById('topText').value = randomText.top;
+            document.getElementById('bottomText').value = randomText.bottom;
+            
+            // Случайный шаблон
+            const templates = Object.keys(templateImages);
+            const randomTemplate = templates[Math.floor(Math.random() * templates.length)];
+            selectTemplate(randomTemplate);
+            
+            speakText("Случайный мем создан! Унижай в случайном стиле!");
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = text;
+                msg.rate = 1.1;
+                msg.pitch = 0.9;
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        // Автогенерация первого мема при загрузке
+        window.onload = function() {
+            generateMeme();
+            speakText("Добро пожаловать в генератор мемов! Создавай унизительные мемы про сына шлюхи!");
+        }
+    </script>
+</body>
+</html>
