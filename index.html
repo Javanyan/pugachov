@@ -201,8 +201,8 @@
                 <button class="control-btn" onclick="toggleBackground()">🎨 СМЕНИТЬ ФОН</button>
                 <button class="control-btn" onclick="maxShame()">☠️ МАКСИМАЛЬНЫЙ ПОЗОР</button>
                 <button class="control-btn" onclick="autoMode()">🤖 АВТО-УНИЖЕНИЕ</button>
-                <!-- НОВАЯ КНОПКА ПЕРЕХОДА В ИГРУ -->
                 <button class="control-btn" onclick="goToGame()" style="background: linear-gradient(45deg, #ffff00, #ff9900); color: black;">🎮 ПЕРЕЙТИ В ИГРУ</button>
+                <button class="control-btn" onclick="goToMeme()" style="background: linear-gradient(45deg, #ff00ff, #9900ff); color: white;">🎭 ГЕНЕРАТОР МЕМОВ</button>
             </div>
         </div>
 
@@ -252,38 +252,63 @@
         const insultPhrases = {
             son: [
                 "ЭТОТ ТИП СЫН ШЛЮХИ ТАНИ! МАТЬ ШЛЮХА РАЙОННОГО МАСШТАБА!",
-                "СЫН ШЛЮХИ УНАСЛЕДОВАЛ ПРОФЕССИЮ МАТЕРИ! ТОЖЕ ПРОДАЁТСЯ!",
-                "ГЕНЫ ШЛЮХИ ПРОЯВЛЯЮТСЯ В КАЖДОЙ ЧЕРТЕ ЭТОГО УЁБКА!",
-                "СЫН ШЛЮХИ ТАНИ - ХОДЯЧЕЕ ДОКАЗАТЕЛЬСТВО ДЕГРАДАЦИИ!",
-                "ЭТОТ УРОД РОДИЛСЯ ОТ ШЛЮХИ И НЕИЗВЕСТНОГО КЛИЕНТА!"
+                "СЫН ШЛЮХИ УНАСЛЕДОВАЛ ПРОФЕССИЮ МАТЕРИ! ТОЖЕ ПРОДАЁТСЯ ЗА КОПЕЙКУ!",
+                "ГЕНЫ ШЛЮХИ ПРОЯВЛЯЮТСЯ В КАЖДОЙ ЧЕРТЕ ЭТОГО УЁБКА! ЯБЛОКО ОТ ЯБЛОНИ НЕДАЛЕКО ПАДАЕТ!",
+                "СЫН ШЛЮХИ ТАНИ - ХОДЯЧЕЕ ДОКАЗАТЕЛЬСТВО ДЕГРАДАЦИИ ГЕНОФОНДА!",
+                "ЭТОТ УРОД РОДИЛСЯ ОТ ШЛЮХИ И НЕИЗВЕСТНОГО КЛИЕНТА! НИКТО НЕ ЗНАЕТ КТО ЕГО ОТЕЦ!",
+                "СМОТРИТЕ КАК СЫН ШЛЮХИ ПЫТАЕТСЯ СКРЫТЬ СВОЁ ПРОИСХОЖДЕНИЕ! ХА-ХА-ХА ДА КУДА ТЕБЕ УЁБОК!",
+                "ГЕНЕТИЧЕСКИЙ МУСОР ОТ ШЛЮХИ ТАНИ! ТАКИХ УРОДОВ НАДО СЖИГАТЬ!",
+                "СЫН ШЛЮХИ ТАКЖЕ ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ КАК И ЕГО МАТЬ! НАСЛЕДСТВЕННОЕ ЗАБОЛЕВАНИЕ!",
+                "ВЕСЬ РАЙОН ЗНАЕТ ЧТО ЭТО СЫН ШЛЮХИ ТАНИ! ДАЖЕ СОБАКИ НА НЕГО ЛАЮТ!",
+                "ЭТОТ ТИП СЫН ШЛЮХИ С ДЕТСТВА ПРИВЫК К ПОЗОРУ! ЕГО ДАЖЕ В ШКОЛЕ ИЗДЕВАЛИСЬ!"
             ],
             mother: [
-                "ТАНЯ ШЛЮХА - МАТЬ-ГЕРОИНЯ! СТАЖ 20 ЛЕТ!",
-                "ШЛЮХА ТАНЯ РОДИЛА 5 ДЕТЕЙ ОТ РАЗНЫХ КЛИЕНТОВ!",
-                "МАТЬ ТАНЯ ШЛЮХА ТАКЖЕ СТЫДИТСЯ СВОЕГО УЁБИЩНОГО СЫНА!",
-                "ТАНЯ ШЛЮХА ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ С 16 ЛЕТ!",
-                "ВЕСЬ РАЙОН ЗНАЕТ ШЛЮХУ ТАНЮ И ЕЁ УЁБИЩНОЕ СЕМЕЙСТВО!"
+                "ТАНЯ ШЛЮХА - МАТЬ-ГЕРОИНЯ РАЙОННОГО МАСШТАБА! СТАЖ 20 ЛЕТ БЕЗ ПЕРЕРЫВА!",
+                "ШЛЮХА ТАНЯ РОДИЛА 5 ДЕТЕЙ ОТ РАЗНЫХ КЛИЕНТОВ! НИКТО НЕ ЗНАЕТ СКОЛЬКО ИХ НА САМОМ ДЕЛЕ!",
+                "МАТЬ ТАНЯ ШЛЮХА ТАКЖЕ СТЫДИТСЯ СВОЕГО УЁБИЩНОГО СЫНА! НО ДЕНЬГИ ВАЖНЕЕ!",
+                "ТАНЯ ШЛЮХА ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ С 16 ЛЕТ! ОПЫТ КОЛОССАЛЬНЫЙ!",
+                "ВЕСЬ РАЙОН ЗНАЕТ ШЛЮХУ ТАНЮ И ЕЁ УЁБИЩНОЕ СЕМЕЙСТВО! ЭТО МЕСТНАЯ ДОСТОПРИМЕЧАТЕЛЬНОСТЬ!",
+                "ШЛЮХА ТАНЯ ПРОДАЁТСЯ ЗА БУТЫЛКУ ВОДКИ И ПАЧКУ СИГАРЕТ! АКЦИИ И СКИДКИ ПО ЧЕТВЕРГАМ!",
+                "МАТЬ ШЛЮХА - СЫН ДЕБИЛ! ИДЕАЛЬНАЯ СЕМЕЙКА ДЛЯ ПОЗОРА! ЦИРК УРОДОВ!",
+                "ТАНЯ ШЛЮХА ТАКЖЕ УРОДЛИВА КАК И ЕЁ СЫН! ГЕНЫ НЕ ОБМАНЕШЬ!",
+                "ШЛЮХА ТАНЯ РОДИЛА ЭТО ДЕРЬМО И ТЕПЕРЬ ВСЕ СМЕЮТСЯ! ПРАВИЛЬНО ДЕЛАЮТ!",
+                "МАТЬ ТАНЯ ШЛЮХА - ПРИМЕР ДЛЯ ПОДРАЖАНИЯ ВСЕХ ШЛЮХ РАЙОНА! КОРОЛЕВА ПРОСТИТУЦИИ!"
             ],
             brother: [
-                "НИКИТА ДЕБИЛ - БРАТ С IQ КОМНАТНОЙ ТЕМПЕРАТУРЫ!",
-                "НИКИТА ДЕБИЛ НЕ МОЖЕТ ДОСЧИТАТЬ ДО ПЯТИ БЕЗ ПОМОЩИ!",
-                "БРАТ НИКИТА ДЕБИЛ ТАКОЙ ЖЕ УЁБОК КАК И ЕГО БРАТ!",
-                "НИКИТА ДЕБИЛ УНАСЛЕДОВАЛ ГЕНЫ ШЛЮХИ МАТЕРИ!",
-                "БРАТ-ДЕБИЛ НИКИТА ТОЖЕ ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ!"
+                "НИКИТА ДЕБИЛ - БРАТ С IQ КОМНАТНОЙ ТЕМПЕРАТУРЫ! 20 ГРАДУСОВ И ТО ПЕРЕОЦЕНКА!",
+                "НИКИТА ДЕБИЛ НЕ МОЖЕТ ДОСЧИТАТЬ ДО ПЯТИ БЕЗ ПОМОЩИ! ПАЛЬЦЕВ НЕ ХВАТАЕТ!",
+                "БРАТ НИКИТА ДЕБИЛ ТАКОЙ ЖЕ УЁБОК КАК И ЕГО БРАТ! ДВА САПОГА ПАРА!",
+                "НИКИТА ДЕБИЛ УНАСЛЕДОВАЛ ГЕНЫ ШЛЮХИ МАТЕРИ! ТОЖЕ ТУПОЙ КАК ПРОБКА!",
+                "БРАТ-ДЕБИЛ НИКИТА ТОЖЕ ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ! НО ЕГО БЕРУТ ТОЛЬКО ЗА ЕДУ!",
+                "НИКИТА ДЕБИЛ - ВТОРОЙ СЫН ШЛЮХИ ТАНИ! ЗАПАСНОЙ УРОД НА ВСЯКИЙ СЛУЧАЙ!",
+                "БРАТ НИКИТА ДЕБИЛ С ДЕТСТВА ОТСТАВАЛ В РАЗВИТИИ! ДАЖЕ ОТ СВОЕГО БРАТА-ДЕБИЛА!",
+                "НИКИТА ДЕБИЛ НЕ МОЖЕТ ПРОЧЕСТЬ ЭТОТ ТЕКСТ! ОН ДУМАЕТ ЧТО ЭТО КАРТИНКИ!",
+                "БРАТ-ДЕБИЛ НИКИТА ТАКОЙ ЖЕ УРОД КАК И ВСЯ СЕМЬЯ! ЯБЛОКО ОТ ЯБЛОНИ!",
+                "НИКИТА ДЕБИЛ - ЖИВОЕ ДОКАЗАТЕЛЬСТВО ДЕГРАДАЦИИ! ЕГО МОЗГ РАБОТАЕТ КАК СТАРАЯ ВИНДОВС!"
             ],
             father: [
-                "САША АЛКОНАВТ - ОТЕЦ-АЛКОГОЛИК КОСМИЧЕСКОГО УРОВНЯ!",
-                "ПАПА САША АЛКОНАВТ ПЬЁТ УЖЕ 30 ЛЕТ БЕЗ ПЕРЕРЫВА!",
-                "САША АЛКОНАВТ - ОТЕЦ КОТОРЫЙ НИКОГДА НЕ РАБОТАЛ!",
-                "ПАПА АЛКОНАВТ САША ТОЖЕ ПРОДАЁТСЯ ЗА БУТЫЛКУ!",
-                "САША АЛКОНАВТ - ГЛАВА СЕМЕЙКИ УРОДОВ!"
+                "САША АЛКОНАВТ - ОТЕЦ-АЛКОГОЛИК КОСМИЧЕСКОГО УРОВНЯ! ПЬЁТ КАК НЕ В СЕБЕ!",
+                "ПАПА САША АЛКОНАВТ ПЬЁТ УЖЕ 30 ЛЕТ БЕЗ ПЕРЕРЫВА! ДАЖЕ ВО СНЕ ПЬЁТ!",
+                "САША АЛКОНАВТ - ОТЕЦ КОТОРЫЙ НИКОГДА НЕ РАБОТАЛ! ТОЛЬКО ПИЛ И ПРОДАВАЛСЯ!",
+                "ПАПА АЛКОНАВТ САША ТОЖЕ ПРОДАЁТСЯ ЗА БУТЫЛКУ! СЕМЕЙНЫЙ БИЗНЕС!",
+                "САША АЛКОНАВТ - ГЛАВА СЕМЕЙКИ УРОДОВ! ЛИДЕР ПО УПОТРЕБЛЕНИЮ АЛКОГОЛЯ!",
+                "ОТЕЦ САША АЛКОНАВТ ТАКОЙ ЖЕ УЁБОК КАК И ЕГО ДЕТИ! ВСЯ СЕМЬЯ - ОДНО УРОДЛИВОЕ ЦЕЛОЕ!",
+                "САША АЛКОНАВТ ПЬЁТ ДАЖЕ ВО СНЕ! ЕМУ СНИТСЯ ЧТО ОН ПЬЁТ!",
+                "ПАПА АЛКОНАВТ - ПРИМЕР ДЛЯ ПОДРАЖАНИЯ ВСЕХ АЛКОГОЛИКОВ РАЙОНА! ЛЕГЕНДА!",
+                "САША АЛКОНАВТ НИКОГДА НЕ ВИДЕЛ СВОИХ ДЕТЕЙ ТРЕЗВЫМИ! ОН ИХ ДАЖЕ НЕ УЗНАЕТ!",
+                "ОТЕЦ-АЛКОНАВТ САША ТАКЖЕ СТЫДИТСЯ СВОЕЙ СЕМЬИ! НО В ОПЬЯНЕНИИ ЕМУ ПОХУЙ!"
             ],
             family: [
-                "ВСЯ СЕМЕЙКА - ШЛЮХА, АЛКОНАВТ И ДВА ДЕБИЛА!",
-                "СЕМЕЙКА УРОДОВ В ПОЛНОМ СОСТАВЕ! ШЛЮХА МАТЬ, АЛКОНАВТ ОТЕЦ!",
-                "ЦЕЛАЯ ДИНАСТИЯ УРОДОВ! ОТ ШЛЮХИ ДО АЛКОНАВТА!",
-                "СЕМЕЙКА ДОСТИГЛА АБСОЛЮТНОГО ДНА ОБЩЕСТВА!",
-                "ВСЯ СЕМЬЯ - ХОДЯЧИЙ ПОЗОР РАЙОНА!"
+                "ВСЯ СЕМЕЙКА - ШЛЮХА, АЛКОНАВТ И ДВА ДЕБИЛА! ИДЕАЛЬНАЯ КОМАНДА ДЛЯ ПОЗОРА!",
+                "СЕМЕЙКА УРОДОВ В ПОЛНОМ СОСТАВЕ! ШЛЮХА МАТЬ, АЛКОНАВТ ОТЕЦ, ДЕТИ-ДЕБИЛЫ! ЦИРК!",
+                "ЦЕЛАЯ ДИНАСТИЯ УРОДОВ! ШЛЮХА ТАНЯ, САША АЛКОНАВТ, СЫН ШЛЮХИ И НИКИТА ДЕБИЛ! ШЕДЕВР!",
+                "СЕМЕЙКА ДОСТИГЛА АБСОЛЮТНОГО ДНА ОБЩЕСТВА! ДАЛЬШЕ УЖЕ НЕКУДА!",
+                "ВСЯ СЕМЬЯ - ХОДЯЧИЙ ПОЗОР РАЙОНА! ИХ ЗНАЮТ ДАЖЕ В СОСЕДНИХ ГОРОДАХ!",
+                "СЕМЕЙКА УРОДОВ - ПРИМЕР ДЛЯ ВСЕХ КАК НЕ НАДО ЖИТЬ! УЧЕБНОЕ ПОСОБИЕ ПО ДЕГРАДАЦИИ!",
+                "ЦЕЛАЯ ДИНАСТИЯ ДЕГЕНЕРАТОВ! ОТ ШЛЮХИ ДО АЛКОНАВТА! ГЕНЕТИЧЕСКИЙ МУСОР!",
+                "СЕМЕЙКА В КОТОРОЙ ВСЕ УРОДЫ! ОТ МАТЕРИ ДО ДЕТЕЙ! РЕДКИЙ СЛУЧАЙ!",
+                "ПОЛНЫЙ КОМПЛЕКТ УРОДОВ! ШЛЮХА, АЛКОНАВТ И ДВА ДЕБИЛА! БИНГО!",
+                "СЕМЕЙКА ДОСТОЙНА КНИГИ РЕКОРДОВ ГИННЕССА ПО УРОДСТВУ! МИРОВОЙ РЕКОРД!"
             ]
         };
 
@@ -292,9 +317,19 @@
             window.location.href = 'game.html';
         }
 
+        // НОВАЯ ФУНКЦИЯ ПЕРЕХОДА В ГЕНЕРАТОР МЕМОВ
+        function goToMeme() {
+            window.location.href = 'meme.html';
+        }
+
         function init() {
             createPhotoGrid();
             updateStats();
+            
+            // АВТО-ПРИВЕТСТВИЕ С ОЗВУЧКОЙ
+            setTimeout(() => {
+                speakText("ДОБРО ПОЖАЛОВАТЬ В АД УНИЖЕНИЙ, УЁБОК! НАЖМИ ЛЮБУЮ КНОПКУ И НАСЛАЖДАЙСЯ ПОЗОРОМ ЭТОЙ СЕМЕЙКИ УРОДОВ!");
+            }, 1000);
         }
 
         function createPhotoGrid() {
@@ -346,9 +381,18 @@
             if ('speechSynthesis' in window) {
                 const msg = new SpeechSynthesisUtterance();
                 msg.text = text;
-                msg.rate = 1.1;
-                msg.pitch = 0.9;
+                msg.rate = 1.2; // ЕЩЁ БЫСТРЕЕ
+                msg.pitch = 0.8; // ЕЩЁ НИЖЕ
                 msg.volume = 1;
+                
+                // СЛУЧАЙНЫЕ ИЗМЕНЕНИЯ ДЛЯ ЕБАНУТОСТИ
+                if (Math.random() > 0.7) {
+                    msg.rate = 1.5; // ОЧЕНЬ БЫСТРО
+                }
+                if (Math.random() > 0.8) {
+                    msg.pitch = 1.2; // ВЫСОКИЙ ГОЛОС
+                }
+                
                 window.speechSynthesis.speak(msg);
             }
         }
@@ -360,10 +404,23 @@
             stupidityLevel = Math.min(100, stupidityLevel + 4);
             updateStats();
             
+            // ЕБАНУТЫЕ ВИЗУАЛЬНЫЕ ЭФФЕКТЫ
             document.body.style.background = shameLevel > 50 ? '#8B0000' : '#ff0000';
             setTimeout(() => {
                 document.body.style.background = 'linear-gradient(45deg, #ff0000, #8B0000, #000000)';
             }, 300);
+            
+            // СЛУЧАЙНЫЕ ДОПОЛНИТЕЛЬНЫЕ ОЗВУЧКИ
+            if (Math.random() < 0.3) {
+                const bonusPhrases = [
+                    "ПИЗДЕЦ КАКОЙ ПОЗОР!", "ХА-ХА-ХА УЁБИЩЕ!", 
+                    "СМОТРИ КАК ОН СТЫДИТСЯ!", "МАТЬ ЕГО ШЛЮХА ПЛАЧЕТ!",
+                    "ЭТОМУ ДЕБИЛУ КОНЕЦ!", "ВСЯ СЕМЬЯ В АДУ ГОРИТ!"
+                ];
+                setTimeout(() => {
+                    speakText(bonusPhrases[Math.floor(Math.random() * bonusPhrases.length)]);
+                }, 1500);
+            }
         }
 
         function updateStats() {
@@ -393,7 +450,8 @@
             alcoholLevel = 0;
             stupidityLevel = 0;
             updateStats();
-            updateCurrentInsult("СБРОС ВЫПОЛНЕН! НАЧИНАЕМ ЗАНОВО!");
+            updateCurrentInsult("СБРОС ВЫПОЛНЕН! НАЧИНАЕМ УНИЖЕНИЯ ЗАНОВО, УЁБКИ!");
+            speakText("СБРОС! НАЧИНАЕМ УНИЖАТЬ ЭТУ СЕМЕЙКУ УРОДОВ С НУЛЯ! ПАХАХАХА!");
         }
 
         function toggleBackground() {
@@ -401,10 +459,13 @@
                 'linear-gradient(45deg, #ff0000, #8B0000, #000000)',
                 'linear-gradient(45deg, #8B0000, #000000)',
                 'linear-gradient(45deg, #FF4500, #000000)',
-                'linear-gradient(45deg, #DC143C, #000000)'
+                'linear-gradient(45deg, #DC143C, #000000)',
+                'linear-gradient(45deg, #ffff00, #ff0000, #000000)',
+                'linear-gradient(45deg, #ff00ff, #000000)'
             ];
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             document.body.style.background = randomColor;
+            speakText("МЕНЯЕМ ФОН! ТЕПЕРЬ УНИЖАЕМ В ДРУГИХ ЦВЕТАХ, ДЕБИЛЫ!");
         }
 
         function maxShame() {
@@ -413,36 +474,36 @@
             stupidityLevel = 100;
             totalInsults += 50;
             updateStats();
-            speakText("ДОСТИГНУТ АБСОЛЮТНЫЙ МАКСИМУМ УРОДСТВА! СЕМЕЙКА УРОДОВ НА 100%!");
+            speakText("АКТИВИРОВАН МАКСИМАЛЬНЫЙ РЕЖИМ УРОДСТВА! СЕМЕЙКА УРОДОВ НА 100 ПРОЦЕНТОВ! ПИЗДЕЦ ПОЛНЫЙ! ВСЕ В АДУ ГОРИТ! ХА-ХА-ХА!");
         }
 
         function autoMode() {
             autoModeActive = !autoModeActive;
             if (autoModeActive) {
-                autoModeInterval = setInterval(playRandomInsult, 3000);
-                speakText("АВТОМАТИЧЕСКИЙ РЕЖИМ УНИЖЕНИЙ АКТИВИРОВАН!");
+                autoModeInterval = setInterval(playRandomInsult, 2000); // БЫСТРЕЕ!
+                speakText("АВТОМАТИЧЕСКИЙ РЕЖИМ УНИЖЕНИЙ АКТИВИРОВАН! ТЕПЕРЬ ЭТИ УРОДЫ БУДУТ СТРАДАТЬ БЕЗ ПЕРЕРЫВА! ПАХАХАХА!");
             } else {
                 clearInterval(autoModeInterval);
-                speakText("АВТОМАТИЧЕСКИЙ РЕЖИМ ОТКЛЮЧЁН!");
+                speakText("АВТОМАТИЧЕСКИЙ РЕЖИМ ОТКЛЮЧЁН! НО ТЫ МОЖЕШЬ ПРОДОЛЖИТЬ УНИЖАТЬ ВРУЧНУЮ, УЁБОК!");
             }
         }
 
         function openModal(src) {
             document.getElementById('modalImage').src = src;
             document.getElementById('photoModal').style.display = 'flex';
-            speakText("УВЕЛИЧИВАЕМ ПОЗОР! СМОТРИТЕ КАКОЙ СЫН ШЛЮХИ!");
+            speakText("УВЕЛИЧИВАЕМ ПОЗОР! СМОТРИ КАКОЙ СЫН ШЛЮХИ КРУПНЫМ ПЛАНОМ! ХА-ХА-ХА КАКОЙ УРОД!");
         }
 
         function closeModal() {
             document.getElementById('photoModal').style.display = 'none';
         }
 
-        // Авто-унижение каждые 30 секунд
+        // Авто-унижение каждые 20 секунд - ЧАЩЕ!
         setInterval(() => {
             if (totalInsults > 0 && !autoModeActive) {
                 playRandomInsult();
             }
-        }, 30000);
+        }, 20000);
 
         window.onload = init;
     </script>
