@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>🎮 ИГРА-КЛИКЕР УНИЖЕНИЙ 🎮</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(45deg, #ff0000, #8B0000, #000000);
+            font-family: Arial, sans-serif; color: white; padding: 20px;
+            text-align: center;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { 
+            padding: 20px; background: rgba(0,0,0,0.8); 
+            border-radius: 15px; border: 4px solid yellow; margin-bottom: 20px;
+        }
+        h1 { 
+            font-size: 2.5em; text-shadow: 4px 4px 0 #ff0000; color: #ffff00; 
+            margin-bottom: 10px;
+        }
+        .back-btn {
+            background: linear-gradient(45deg, #ff0000, #8B0000); color: white;
+            border: none; padding: 12px 25px; font-size: 1.2em; font-weight: bold;
+            cursor: pointer; border-radius: 8px; margin: 10px;
+        }
+        .music-controls {
+            margin: 15px 0;
+        }
+        .music-btn {
+            background: linear-gradient(45deg, #ffff00, #ff9900); color: black;
+            border: none; padding: 10px 20px; font-size: 1em; font-weight: bold;
+            cursor: pointer; border-radius: 8px; margin: 5px;
+        }
+        .stats {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background: rgba(255,0,0,0.3); padding: 15px; border-radius: 10px;
+            border: 2px solid #ff0000;
+        }
+        .stat-value { font-size: 2em; color: yellow; font-weight: bold; }
+        .click-area {
+            margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.7);
+            border-radius: 15px; border: 3px solid red;
+        }
+        .click-image {
+            width: 300px; height: 300px; object-fit: cover; border-radius: 15px;
+            border: 5px solid yellow; cursor: pointer; transition: all 0.1s;
+        }
+        .click-image:active {
+            transform: scale(0.95); border-color: #ffff00;
+            box-shadow: 0 0 30px yellow;
+        }
+        .rewards {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+            margin: 20px 0;
+        }
+        .reward {
+            background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;
+            border: 2px solid #ff4444; opacity: 0.5; transition: all 0.3s;
+        }
+        .reward.unlocked {
+            opacity: 1; border-color: yellow; background: rgba(255,255,0,0.2);
+            transform: scale(1.05);
+        }
+        .reward-image {
+            width: 100px; height: 100px; object-fit: cover; border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .marquee {
+            background: #ff0000; padding: 10px; border-radius: 8px;
+            margin: 15px 0; border: 2px solid yellow;
+        }
+        .click-effects {
+            position: fixed; pointer-events: none; z-index: 1000;
+            font-size: 2em; font-weight: bold; color: yellow;
+            text-shadow: 2px 2px 0 red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 ИГРА-КЛИКЕР УНИЖЕНИЙ 🎮</h1>
+            <button class="back-btn" onclick="goBack()">🔙 НАЗАД К УНИЖЕНИЯМ</button>
+            
+            <div class="music-controls">
+                <button class="music-btn" onclick="toggleMusic()">🎵 ВКЛ/ВЫКЛ МУЗЫКУ</button>
+                <button class="music-btn" onclick="changeVolume(0.1)">🔈 ТИШЕ</button>
+                <button class="music-btn" onclick="changeVolume(0.5)">🔊 ГРОМЧЕ</button>
+            </div>
+        </div>
+
+        <div class="marquee">
+            <marquee behavior="scroll" direction="left">
+                🎯 КЛИКАЙ ПО ФОТКЕ СЫНА ШЛЮХИ! 1000 КЛИКОВ = БИГ МАК! 2000 КЛИКОВ = ТАНЯ ШЛЮХА! 3000 КЛИКОВ = GOLANG! 🎯
+            </marquee>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-value" id="clickCount">0</div>
+                <div>КОЛИЧЕСТВО КЛИКОВ</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="cps">0</div>
+                <div>КЛИКОВ В СЕКУНДУ</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="nextReward">1000</div>
+                <div>ДО СЛЕДУЮЩЕЙ НАГРАДЫ</div>
+            </div>
+        </div>
+
+        <div class="click-area">
+            <h2 style="color: yellow; margin-bottom: 15px;">👆 КЛИКАЙ ПО ЭТОМУ УРОДУ! 👆</h2>
+            <!-- ИЗМЕНИЛ НА PHOTO2.JPG -->
+            <img src="photo2.jpg" alt="Цель для кликов" class="click-image" id="clickTarget" 
+                 onerror="this.src='https://via.placeholder.com/300x300/ff0000/000000?text=СЫН+ШЛЮХИ'">
+            <p style="margin-top: 15px; font-size: 1.2em;">Кликай быстрее! Получай награды!</p>
+        </div>
+
+        <div class="rewards">
+            <div class="reward" id="reward1">
+                <img src="bigmac.png" alt="Биг Мак" class="reward-image" 
+                     onerror="this.src='https://via.placeholder.com/100x100/ffff00/000000?text=БИГ+МАК'">
+                <div>1000 КЛИКОВ</div>
+                <div style="color: yellow; font-weight: bold;">БИГ МАК</div>
+            </div>
+            <div class="reward" id="reward2">
+                <img src="tanya.png" alt="Таня шлюха" class="reward-image" 
+                     onerror="this.src='https://via.placeholder.com/100x100/ff00ff/000000?text=ТАНЯ+ШЛЮХА'">
+                <div>2000 КЛИКОВ</div>
+                <div style="color: yellow; font-weight: bold;">ТАНЯ ШЛЮХА</div>
+            </div>
+            <div class="reward" id="reward3">
+                <img src="golang.png" alt="Golang" class="reward-image" 
+                     onerror="this.src='https://via.placeholder.com/100x100/00ffff/000000?text=GOLANG'">
+                <div>3000 КЛИКОВ</div>
+                <div style="color: yellow; font-weight: bold;">GOLANG</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 15px; background: rgba(255,0,0,0.3); border-radius: 10px;">
+            <h3 style="color: yellow;">🎯 ПРАВИЛА ИГРЫ:</h3>
+            <p>Кликай по фото сына шлюхи чтобы получить награды!</p>
+            <p>1000 кликов = Биг Мак 🍔</p>
+            <p>2000 кликов = Таня шлюха 👩</p>
+            <p>3000 кликов = Golang 💻</p>
+            <p style="margin-top: 10px; color: yellow;">🎵 Музыка включена! Управляй громкостью!</p>
+        </div>
+    </div>
+
+    <!-- Аудио элемент для музыки -->
+    <audio id="backgroundMusic" loop>
+        <source src="musiczxc.mp3" type="audio/mpeg">
+        <source src="musiczxc.ogg" type="audio/ogg">
+        Ваш браузер не поддерживает аудио элемент.
+    </audio>
+
+    <script>
+        let clickCount = 0;
+        let clicksPerSecond = 0;
+        let lastClickTime = Date.now();
+        let clickTimestamps = [];
+        let musicPlaying = false;
+        const backgroundMusic = document.getElementById('backgroundMusic');
+
+        function goBack() {
+            window.location.href = 'index.html';
+        }
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                backgroundMusic.pause();
+                musicPlaying = false;
+                speakText("Музыка выключена! Теперь слышно только унижения!");
+            } else {
+                backgroundMusic.play().catch(e => {
+                    console.log("Автовоспроизведение заблокировано: ", e);
+                    speakText("Нажми на кнопку музыки еще раз чтобы включить!");
+                });
+                musicPlaying = true;
+                speakText("Музыка включена! Наслаждайся унижениями под биты!");
+            }
+        }
+
+        function changeVolume(volume) {
+            backgroundMusic.volume = volume;
+            speakText(`Громкость установлена на ${Math.floor(volume * 100)} процентов!`);
+        }
+
+        function handleClick(event) {
+            clickCount++;
+            clicksPerSecond++;
+            
+            const now = Date.now();
+            clickTimestamps = clickTimestamps.filter(timestamp => now - timestamp < 1000);
+            clickTimestamps.push(now);
+            
+            updateStats();
+            updateRewards();
+            animateClick(event);
+            createClickEffect(event);
+            
+            // Случайные фразы при клике
+            const phrases = [
+                "ЕБИ ЕГО БОЛЬШЕ!", "СЫН ШЛЮХИ ЗАСЛУЖИЛ ЭТО!", 
+                "КЛИКАЙ БЫСТРЕЕ!", "УРОД ДОЛЖЕН СТРАДАТЬ!",
+                "ЗА ШЛЮХУ ТАНЮ!", "ЗА САШУ АЛКОНАВТА!",
+                "НИКИТА ДЕБИЛ ГОРДИТСЯ ТОБОЙ!", "ЕЩЁ ОДИН КЛИК!",
+                "БЕЙ СИЛЬНЕЕ!", "ЭТОМУ УРОДУ МЕНЬШЕ НЕ БЫВАЕТ!"
+            ];
+            
+            if (Math.random() < 0.15) {
+                speakText(phrases[Math.floor(Math.random() * phrases.length)]);
+            }
+
+            // Специальные звуковые эффекты каждые 100 кликов
+            if (clickCount % 100 === 0) {
+                speakText(`УРА! ${clickCount} КЛИКОВ! ТЫ НАСТОЯЩИЙ МАНЬЯК!`);
+            }
+        }
+
+        function updateStats() {
+            document.getElementById('clickCount').textContent = clickCount;
+            
+            const now = Date.now();
+            clicksPerSecond = clickTimestamps.filter(timestamp => now - timestamp < 1000).length;
+            document.getElementById('cps').textContent = clicksPerSecond;
+            
+            const nextReward = getNextRewardTarget();
+            const remaining = nextReward - clickCount;
+            document.getElementById('nextReward').textContent = remaining > 0 ? remaining : 0;
+        }
+
+        function getNextRewardTarget() {
+            if (clickCount < 1000) return 1000;
+            if (clickCount < 2000) return 2000;
+            if (clickCount < 3000) return 3000;
+            return 4000;
+        }
+
+        function updateRewards() {
+            const reward1 = document.getElementById('reward1');
+            const reward2 = document.getElementById('reward2');
+            const reward3 = document.getElementById('reward3');
+            
+            if (clickCount >= 1000) {
+                reward1.classList.add('unlocked');
+                if (clickCount === 1000) {
+                    speakText("ПОЗДРАВЛЯЮ! ТЫ ЗАРАБОТАЛ БИГ МАК! СЫН ШЛЮХИ ТЕБЯ БЛАГОДАРИТ!");
+                    celebrate();
+                }
+            }
+            if (clickCount >= 2000) {
+                reward2.classList.add('unlocked');
+                if (clickCount === 2000) {
+                    speakText("УРА! ТЫ ВЫИГРАЛ ТАНЮ ШЛЮХУ! ОНА ТЕПЕРЬ ТВОЯ!");
+                    celebrate();
+                }
+            }
+            if (clickCount >= 3000) {
+                reward3.classList.add('unlocked');
+                if (clickCount === 3000) {
+                    speakText("ВАУ! ТЫ ДОСТИГ GOLANG! ТЫ НАСТОЯЩИЙ ГЕРОЙ!");
+                    celebrate();
+                }
+            }
+        }
+
+        function animateClick(event) {
+            const target = document.getElementById('clickTarget');
+            target.style.transform = 'scale(0.95)';
+            target.style.borderColor = '#ffff00';
+            target.style.boxShadow = '0 0 30px yellow';
+            
+            setTimeout(() => {
+                target.style.transform = 'scale(1)';
+                target.style.borderColor = 'yellow';
+                target.style.boxShadow = 'none';
+            }, 100);
+        }
+
+        function createClickEffect(event) {
+            const effect = document.createElement('div');
+            effect.className = 'click-effects';
+            effect.textContent = '+1';
+            effect.style.left = (event.clientX - 20) + 'px';
+            effect.style.top = (event.clientY - 40) + 'px';
+            
+            document.body.appendChild(effect);
+            
+            // Анимация эффекта
+            let opacity = 1;
+            let posY = event.clientY - 40;
+            const animate = setInterval(() => {
+                opacity -= 0.05;
+                posY -= 2;
+                effect.style.opacity = opacity;
+                effect.style.top = posY + 'px';
+                
+                if (opacity <= 0) {
+                    clearInterval(animate);
+                    document.body.removeChild(effect);
+                }
+            }, 50);
+        }
+
+        function celebrate() {
+            // Мигание фона при достижении награды
+            let flashCount = 0;
+            const flashInterval = setInterval(() => {
+                document.body.style.background = flashCount % 2 === 0 
+                    ? 'linear-gradient(45deg, #ffff00, #ff9900, #000000)' 
+                    : 'linear-gradient(45deg, #ff0000, #8B0000, #000000)';
+                flashCount++;
+                
+                if (flashCount > 6) {
+                    clearInterval(flashInterval);
+                    document.body.style.background = 'linear-gradient(45deg, #ff0000, #8B0000, #000000)';
+                }
+            }, 200);
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = text;
+                msg.rate = 1.1;
+                msg.pitch = 0.9;
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        // Авто-обновление статистики каждую секунду
+        setInterval(updateStats, 1000);
+
+        // Авто-кликер (бонус за высокий CPS)
+        setInterval(() => {
+            if (clicksPerSecond > 10) {
+                const bonus = Math.floor(clicksPerSecond / 3);
+                clickCount += bonus;
+                updateStats();
+                updateRewards();
+                
+                // Создаем несколько бонусных эффектов
+                for (let i = 0; i < bonus; i++) {
+                    setTimeout(() => {
+                        const randomX = Math.random() * window.innerWidth;
+                        const randomY = Math.random() * window.innerHeight;
+                        const fakeEvent = { clientX: randomX, clientY: randomY };
+                        createClickEffect(fakeEvent);
+                    }, i * 100);
+                }
+            }
+        }, 1000);
+
+        // Авто-старт музыки через 2 секунды
+        setTimeout(() => {
+            if (!musicPlaying) {
+                backgroundMusic.volume = 0.3;
+                backgroundMusic.play().catch(e => {
+                    console.log("Автовоспроизведение заблокировано, ждем клика");
+                });
+                musicPlaying = true;
+            }
+        }, 2000);
+
+        document.getElementById('clickTarget').addEventListener('click', handleClick);
+
+        // Обработка ошибки загрузки музыки
+        backgroundMusic.addEventListener('error', function(e) {
+            console.log("Ошибка загрузки музыки: ", e);
+            speakText("Файл музыки не найден! Добавь файл musiczxc.mp3 в папку!");
+        });
+    </script>
+</body>
+</html>
