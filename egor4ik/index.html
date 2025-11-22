@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔞 МЕГА-УНИЖЕНИЕ СЕМЕЙКИ 🔞</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: linear-gradient(45deg, #ff0000, #8B0000, #000000);
+            font-family: Arial, sans-serif; color: white; padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { 
+            text-align: center; padding: 20px; background: rgba(0,0,0,0.8); 
+            border-radius: 15px; border: 4px solid yellow; margin-bottom: 20px;
+        }
+        h1 { 
+            font-size: 3em; text-shadow: 4px 4px 0 #ff0000; color: #ffff00; 
+            margin-bottom: 10px;
+        }
+        .marquee-container {
+            background: #ff0000; padding: 10px; margin: 15px 0; border-radius: 8px;
+            border: 2px solid yellow;
+        }
+        .marquee { font-size: 1.4em; color: yellow; font-weight: bold; }
+        .family-stats {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;
+            margin: 20px 0;
+        }
+        .family-member {
+            background: rgba(255,0,0,0.3); padding: 15px; border-radius: 10px;
+            border: 2px solid #ff0000; text-align: center;
+        }
+        .member-name { font-size: 1.4em; color: yellow; margin-bottom: 5px; }
+        .stats-panel {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+            margin: 20px 0;
+        }
+        .stat-item {
+            background: rgba(255,0,0,0.2); padding: 15px; border-radius: 8px;
+            text-align: center; border: 2px solid #ff4444;
+        }
+        .stat-value { font-size: 2em; color: yellow; font-weight: bold; }
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px; margin: 30px 0;
+        }
+        .photo-item {
+            position: relative; border: 4px solid #ff0000; border-radius: 10px;
+            overflow: hidden; background: #222; transition: all 0.3s ease;
+            aspect-ratio: 1;
+        }
+        .photo-item:hover {
+            transform: scale(1.05); border-color: yellow;
+            box-shadow: 0 0 20px red;
+        }
+        .photo-item img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+        .insult-text {
+            position: absolute; bottom: 0; left: 0; right: 0;
+            background: linear-gradient(transparent, rgba(255,0,0,0.9));
+            color: white; padding: 10px; font-weight: bold; font-size: 1.1em;
+            text-shadow: 1px 1px 0 #000;
+        }
+        .controls-section {
+            background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px;
+            margin: 30px 0; border: 3px solid red;
+        }
+        .controls-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px; margin: 15px 0;
+        }
+        .control-btn {
+            background: linear-gradient(45deg, #ff0000, #8B0000); color: white;
+            border: none; padding: 15px; font-size: 1em; font-weight: bold;
+            cursor: pointer; border-radius: 8px; transition: all 0.3s ease;
+        }
+        .control-btn:hover {
+            background: linear-gradient(45deg, #cc0000, #ff0000);
+            transform: translateY(-2px);
+        }
+        .insult-display {
+            background: rgba(0,0,0,0.9); padding: 20px; border-radius: 10px;
+            margin: 25px 0; border: 2px solid red; min-height: 80px;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+        }
+        .current-insult {
+            font-size: 1.5em; color: #ff6b6b; font-weight: bold;
+            text-shadow: 1px 1px 0 #000;
+        }
+        .achievements-section {
+            background: rgba(139,0,0,0.8); padding: 20px; border-radius: 15px;
+            margin: 30px 0;
+        }
+        .achievements-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        .achievement {
+            background: rgba(255,0,0,0.3); padding: 15px; border-radius: 8px;
+            border-left: 4px solid yellow; font-size: 1em;
+        }
+        .progress-bars { margin: 25px 0; }
+        .progress-bar {
+            height: 25px; background: #333; border-radius: 12px;
+            margin: 10px 0; overflow: hidden; border: 2px solid #ff0000;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, #ff0000, #ffff00);
+            border-radius: 10px; transition: width 0.5s ease;
+        }
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%;
+            height: 100%; background: rgba(0,0,0,0.95); z-index: 1000;
+            align-items: center; justify-content: center;
+        }
+        .modal-content { max-width: 90%; max-height: 90%; border: 4px solid red; border-radius: 10px; }
+        .modal img { width: 100%; height: 100%; object-fit: contain; }
+        .close-modal {
+            position: absolute; top: 15px; right: 25px; color: white;
+            font-size: 2.5em; cursor: pointer; background: red; border-radius: 50%;
+            width: 50px; height: 50px; display: flex; align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👑 МЕГА-УНИЖЕНИЕ СЕМЕЙКИ 👑</h1>
+            <div class="marquee-container">
+                <marquee class="marquee" behavior="scroll" direction="left" scrollamount="12">
+                    🔥 ШЛЮХА ТАНЯ + СЫН ШЛЮХИ + НИКИТА ДЕБИЛ + САША АЛКОНАВТ 🔥
+                </marquee>
+            </div>
+        </div>
+
+        <div class="family-stats">
+            <div class="family-member">
+                <div class="member-name">👩 ТАНЯ ШЛЮХА</div>
+                <div>Мать-шлюха районного масштаба</div>
+            </div>
+            <div class="family-member">
+                <div class="member-name">👦 СЫН ШЛЮХИ</div>
+                <div>Главный уёбок наследник</div>
+            </div>
+            <div class="family-member">
+                <div class="member-name">🧠 НИКИТА ДЕБИЛ</div>
+                <div>Брат с IQ комнатной температуры</div>
+            </div>
+            <div class="family-member">
+                <div class="member-name">🍺 САША АЛКОНАВТ</div>
+                <div>Отец-алкоголик космического уровня</div>
+            </div>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-item">
+                <div class="stat-value" id="totalInsults">0</div>
+                <div>ОБЩИХ УНИЖЕНИЙ</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="shameLevel">0%</div>
+                <div>УРОВЕНЬ ПОЗОРА</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="familyRating">F</div>
+                <div>РЕЙТИНГ СЕМЕЙКИ</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="alcoholLevel">0%</div>
+                <div>УРОВЕНЬ АЛКОГОЛЯ</div>
+            </div>
+        </div>
+
+        <div class="insult-display">
+            <div class="current-insult" id="currentInsult">
+                ДОБРО ПОЖАЛОВАТЬ В АД УНИЖЕНИЙ! НАЖМИ ЛЮБУЮ КНОПКУ ДЛЯ СТАРТА!
+            </div>
+        </div>
+
+        <div class="photo-grid" id="photoGrid"></div>
+
+        <div class="controls-section">
+            <h2 style="text-align: center; color: yellow; margin-bottom: 20px; font-size: 2em;">
+                🎮 ПУЛЬТ УПРАВЛЕНИЯ УНИЖЕНИЯМИ 🎮
+            </h2>
+            <div class="controls-grid">
+                <button class="control-btn" onclick="playInsult('son')">🔊 СЫН ШЛЮХИ</button>
+                <button class="control-btn" onclick="playInsult('mother')">🔊 ТАНЯ ШЛЮХА</button>
+                <button class="control-btn" onclick="playInsult('brother')">🔊 НИКИТА ДЕБИЛ</button>
+                <button class="control-btn" onclick="playInsult('father')">🔊 САША АЛКОНАВТ</button>
+                <button class="control-btn" onclick="playInsult('family')">🔊 ВСЯ СЕМЕЙКА</button>
+                <button class="control-btn" onclick="playRandomInsult()">🎲 СЛУЧАЙНОЕ УНИЖЕНИЕ</button>
+                <button class="control-btn" onclick="playAllInsults()">💀 ЗАПУСТИТЬ ВСЕ</button>
+                <button class="control-btn" onclick="increaseCounter()">➕ ДОБАВИТЬ ПОЗОРА</button>
+                <button class="control-btn" onclick="resetCounter()">🔄 СБРОСИТЬ ВСЁ</button>
+                <button class="control-btn" onclick="toggleBackground()">🎨 СМЕНИТЬ ФОН</button>
+                <button class="control-btn" onclick="maxShame()">☠️ МАКСИМАЛЬНЫЙ ПОЗОР</button>
+                <button class="control-btn" onclick="autoMode()">🤖 АВТО-УНИЖЕНИЕ</button>
+                <!-- НОВАЯ КНОПКА ПЕРЕХОДА В ИГРУ -->
+                <button class="control-btn" onclick="goToGame()" style="background: linear-gradient(45deg, #ffff00, #ff9900); color: black;">🎮 ПЕРЕЙТИ В ИГРУ</button>
+            </div>
+        </div>
+
+        <div class="achievements-section">
+            <h2 style="text-align: center; color: yellow; margin-bottom: 20px; font-size: 2em;">
+                🏆 ДОСТИЖЕНИЯ СЕМЕЙКИ УРОДОВ 🏆
+            </h2>
+            <div class="achievements-grid">
+                <div class="achievement">🏅 СЫН ШЛЮХИ МЕЖДУНАРОДНОГО КЛАССА</div>
+                <div class="achievement">💩 ГЕНЕТИЧЕСКИЙ МУСОР ОТ ШЛЮХИ</div>
+                <div class="achievement">🧠 НИКИТА ДЕБИЛ С IQ 50</div>
+                <div class="achievement">🍺 САША АЛКОНАВТ КОСМИЧЕСКОГО УРОВНЯ</div>
+                <div class="achievement">👁️ УРОДЛИВАЯ ВНЕШНОСТЬ Х3</div>
+                <div class="achievement">🎪 ЦИРК УРОДОВ В ПОЛНОМ СОСТАВЕ</div>
+                <div class="achievement">📉 ДНО ОБЩЕСТВА ДОСТИГНУТО</div>
+                <div class="achievement">🔥 АБСОЛЮТНЫЙ ПОЗОР 100%</div>
+            </div>
+        </div>
+
+        <div class="progress-bars">
+            <h3 style="color: yellow; margin-bottom: 15px; font-size: 1.5em;">📊 ПРОГРЕСС УРОДСТВА:</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="shameProgress" style="width: 0%"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="alcoholProgress" style="width: 0%"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="stupidityProgress" style="width: 0%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="photoModal">
+        <div class="close-modal" onclick="closeModal()">×</div>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <script>
+        let totalInsults = 0;
+        let shameLevel = 0;
+        let alcoholLevel = 0;
+        let stupidityLevel = 0;
+        let autoModeActive = false;
+        let autoModeInterval;
+
+        const insultPhrases = {
+            son: [
+                "ЭТОТ ТИП СЫН ШЛЮХИ ТАНИ! МАТЬ ШЛЮХА РАЙОННОГО МАСШТАБА!",
+                "СЫН ШЛЮХИ УНАСЛЕДОВАЛ ПРОФЕССИЮ МАТЕРИ! ТОЖЕ ПРОДАЁТСЯ!",
+                "ГЕНЫ ШЛЮХИ ПРОЯВЛЯЮТСЯ В КАЖДОЙ ЧЕРТЕ ЭТОГО УЁБКА!",
+                "СЫН ШЛЮХИ ТАНИ - ХОДЯЧЕЕ ДОКАЗАТЕЛЬСТВО ДЕГРАДАЦИИ!",
+                "ЭТОТ УРОД РОДИЛСЯ ОТ ШЛЮХИ И НЕИЗВЕСТНОГО КЛИЕНТА!"
+            ],
+            mother: [
+                "ТАНЯ ШЛЮХА - МАТЬ-ГЕРОИНЯ! СТАЖ 20 ЛЕТ!",
+                "ШЛЮХА ТАНЯ РОДИЛА 5 ДЕТЕЙ ОТ РАЗНЫХ КЛИЕНТОВ!",
+                "МАТЬ ТАНЯ ШЛЮХА ТАКЖЕ СТЫДИТСЯ СВОЕГО УЁБИЩНОГО СЫНА!",
+                "ТАНЯ ШЛЮХА ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ С 16 ЛЕТ!",
+                "ВЕСЬ РАЙОН ЗНАЕТ ШЛЮХУ ТАНЮ И ЕЁ УЁБИЩНОЕ СЕМЕЙСТВО!"
+            ],
+            brother: [
+                "НИКИТА ДЕБИЛ - БРАТ С IQ КОМНАТНОЙ ТЕМПЕРАТУРЫ!",
+                "НИКИТА ДЕБИЛ НЕ МОЖЕТ ДОСЧИТАТЬ ДО ПЯТИ БЕЗ ПОМОЩИ!",
+                "БРАТ НИКИТА ДЕБИЛ ТАКОЙ ЖЕ УЁБОК КАК И ЕГО БРАТ!",
+                "НИКИТА ДЕБИЛ УНАСЛЕДОВАЛ ГЕНЫ ШЛЮХИ МАТЕРИ!",
+                "БРАТ-ДЕБИЛ НИКИТА ТОЖЕ ЗАНИМАЕТСЯ ПРОСТИТУЦИЕЙ!"
+            ],
+            father: [
+                "САША АЛКОНАВТ - ОТЕЦ-АЛКОГОЛИК КОСМИЧЕСКОГО УРОВНЯ!",
+                "ПАПА САША АЛКОНАВТ ПЬЁТ УЖЕ 30 ЛЕТ БЕЗ ПЕРЕРЫВА!",
+                "САША АЛКОНАВТ - ОТЕЦ КОТОРЫЙ НИКОГДА НЕ РАБОТАЛ!",
+                "ПАПА АЛКОНАВТ САША ТОЖЕ ПРОДАЁТСЯ ЗА БУТЫЛКУ!",
+                "САША АЛКОНАВТ - ГЛАВА СЕМЕЙКИ УРОДОВ!"
+            ],
+            family: [
+                "ВСЯ СЕМЕЙКА - ШЛЮХА, АЛКОНАВТ И ДВА ДЕБИЛА!",
+                "СЕМЕЙКА УРОДОВ В ПОЛНОМ СОСТАВЕ! ШЛЮХА МАТЬ, АЛКОНАВТ ОТЕЦ!",
+                "ЦЕЛАЯ ДИНАСТИЯ УРОДОВ! ОТ ШЛЮХИ ДО АЛКОНАВТА!",
+                "СЕМЕЙКА ДОСТИГЛА АБСОЛЮТНОГО ДНА ОБЩЕСТВА!",
+                "ВСЯ СЕМЬЯ - ХОДЯЧИЙ ПОЗОР РАЙОНА!"
+            ]
+        };
+
+        // НОВАЯ ФУНКЦИЯ ПЕРЕХОДА В ИГРУ
+        function goToGame() {
+            window.location.href = 'game.html';
+        }
+
+        function init() {
+            createPhotoGrid();
+            updateStats();
+        }
+
+        function createPhotoGrid() {
+            const grid = document.getElementById('photoGrid');
+            for (let i = 1; i <= 9; i++) {
+                const photoItem = document.createElement('div');
+                photoItem.className = 'photo-item';
+                photoItem.onclick = () => openModal(`photo${i}.jpg`);
+                photoItem.innerHTML = `
+                    <img src="photo${i}.jpg" alt="Позор ${i}" onerror="this.src='https://via.placeholder.com/300x300/ff0000/000000?text=ФОТО+${i}'">
+                    <div class="insult-text">${getRandomInsultText()}</div>
+                `;
+                grid.appendChild(photoItem);
+            }
+        }
+
+        function getRandomInsultText() {
+            const texts = [
+                "СЫН ШЛЮХИ КРУПНЫМ ПЛАНОМ!", "НИКИТА ДЕБИЛ В ДЕТСТВЕ!",
+                "ТАНЯ ШЛЮХА И ЕЁ ШЕДЕВР!", "САША АЛКОНАВТ ПЬЮЩИЙ!",
+                "ГЕНЫ ШЛЮХИ ПРОЯВЛЯЮТСЯ!", "УРОДЛИВАЯ РОЖА КРУПНЫМ ПЛАНОМ!",
+                "ДНО ОБЩЕСТВА ДОСТИГНУТО!", "ЦИРК УРОДОВ В ПОЛНОМ СОСТАВЕ!",
+                "АБСОЛЮТНЫЙ ПОБЕДИТЕЛЬ В НИКЧЁМНОСТИ!"
+            ];
+            return texts[Math.floor(Math.random() * texts.length)];
+        }
+
+        function playInsult(type) {
+            const phrases = insultPhrases[type];
+            const text = phrases[Math.floor(Math.random() * phrases.length)];
+            speakText(text);
+            updateCurrentInsult(text);
+            increaseCounter();
+        }
+
+        function playRandomInsult() {
+            const types = Object.keys(insultPhrases);
+            const randomType = types[Math.floor(Math.random() * types.length)];
+            playInsult(randomType);
+        }
+
+        function playAllInsults() {
+            Object.keys(insultPhrases).forEach((type, index) => {
+                setTimeout(() => playInsult(type), index * 2000);
+            });
+        }
+
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const msg = new SpeechSynthesisUtterance();
+                msg.text = text;
+                msg.rate = 1.1;
+                msg.pitch = 0.9;
+                msg.volume = 1;
+                window.speechSynthesis.speak(msg);
+            }
+        }
+
+        function increaseCounter() {
+            totalInsults++;
+            shameLevel = Math.min(100, shameLevel + 5);
+            alcoholLevel = Math.min(100, alcoholLevel + 3);
+            stupidityLevel = Math.min(100, stupidityLevel + 4);
+            updateStats();
+            
+            document.body.style.background = shameLevel > 50 ? '#8B0000' : '#ff0000';
+            setTimeout(() => {
+                document.body.style.background = 'linear-gradient(45deg, #ff0000, #8B0000, #000000)';
+            }, 300);
+        }
+
+        function updateStats() {
+            document.getElementById('totalInsults').textContent = totalInsults;
+            document.getElementById('shameLevel').textContent = shameLevel + '%';
+            document.getElementById('alcoholLevel').textContent = alcoholLevel + '%';
+            
+            let rating = 'F';
+            if (shameLevel >= 80) rating = 'A+';
+            else if (shameLevel >= 60) rating = 'B';
+            else if (shameLevel >= 40) rating = 'C';
+            else if (shameLevel >= 20) rating = 'D';
+            document.getElementById('familyRating').textContent = rating;
+            
+            document.getElementById('shameProgress').style.width = shameLevel + '%';
+            document.getElementById('alcoholProgress').style.width = alcoholLevel + '%';
+            document.getElementById('stupidityProgress').style.width = stupidityLevel + '%';
+        }
+
+        function updateCurrentInsult(text) {
+            document.getElementById('currentInsult').textContent = text;
+        }
+
+        function resetCounter() {
+            totalInsults = 0;
+            shameLevel = 0;
+            alcoholLevel = 0;
+            stupidityLevel = 0;
+            updateStats();
+            updateCurrentInsult("СБРОС ВЫПОЛНЕН! НАЧИНАЕМ ЗАНОВО!");
+        }
+
+        function toggleBackground() {
+            const colors = [
+                'linear-gradient(45deg, #ff0000, #8B0000, #000000)',
+                'linear-gradient(45deg, #8B0000, #000000)',
+                'linear-gradient(45deg, #FF4500, #000000)',
+                'linear-gradient(45deg, #DC143C, #000000)'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.background = randomColor;
+        }
+
+        function maxShame() {
+            shameLevel = 100;
+            alcoholLevel = 100;
+            stupidityLevel = 100;
+            totalInsults += 50;
+            updateStats();
+            speakText("ДОСТИГНУТ АБСОЛЮТНЫЙ МАКСИМУМ УРОДСТВА! СЕМЕЙКА УРОДОВ НА 100%!");
+        }
+
+        function autoMode() {
+            autoModeActive = !autoModeActive;
+            if (autoModeActive) {
+                autoModeInterval = setInterval(playRandomInsult, 3000);
+                speakText("АВТОМАТИЧЕСКИЙ РЕЖИМ УНИЖЕНИЙ АКТИВИРОВАН!");
+            } else {
+                clearInterval(autoModeInterval);
+                speakText("АВТОМАТИЧЕСКИЙ РЕЖИМ ОТКЛЮЧЁН!");
+            }
+        }
+
+        function openModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('photoModal').style.display = 'flex';
+            speakText("УВЕЛИЧИВАЕМ ПОЗОР! СМОТРИТЕ КАКОЙ СЫН ШЛЮХИ!");
+        }
+
+        function closeModal() {
+            document.getElementById('photoModal').style.display = 'none';
+        }
+
+        // Авто-унижение каждые 30 секунд
+        setInterval(() => {
+            if (totalInsults > 0 && !autoModeActive) {
+                playRandomInsult();
+            }
+        }, 30000);
+
+        window.onload = init;
+    </script>
+</body>
+</html>
